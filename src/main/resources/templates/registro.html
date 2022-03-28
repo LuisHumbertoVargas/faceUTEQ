@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Registro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            input{
+                display:block;
+            }
+        </style>
+    </head>
+    <body>
+        <input style="width:300px" data-th-value="${_csrf.token}">
+        <form id="registroForm">
+            <input name="correo" placeholder="correo" type="email">
+            <input name="password" placeholder="Contraseña" type="password">
+            <input name="image" type="file" accept="image/*">
+            <select name="rol">
+                <option value="ROLE_ESTUDIANTE" >Estudiante</option>
+                <option value="ROLE_PROFESOR">Profesor</option>
+            </select>
+            <input name="nombre" placeholder="Nombre" type="text">
+            <input name="apellido1" placeholder="Apellido paterno" type="text">
+            <input name="apellido2" placeholder="Apellido materno" type="text">
+            <input name="edad" placeholder="Edad" type="number">
+            <input name="gustos" placeholder="Gustos" type="text">
+            <input name="formacion" placeholder="Escuela de procedencia" type="text">
+            <input name="trabajo" placeholder="Trabajo" type="text">
+            <!-- Carreras -->
+            <div id="carrerasDiv"></div>
+            <div id="sentimentalesDiv"></div>
+            <div id="estadosDiv"></div>
+            <button id="submitButton" style="display:block;" type="submit">Registrarse</button>
+        </form>
+    </body>
+    <script>
+        const URL = 'http://localhost:8080/';
+        
+        let carrerasDiv = document.getElementById('carrerasDiv');
+        let sentimentalesDiv = document.getElementById('sentimentalesDiv');
+        let estadosDiv = document.getElementById('estadosDiv');
+        let submitButton = document.getElementById('submitButton');
+        let registroForm = document.getElementById('registroForm');
+        
+        registroForm.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            let data = new FormData(e.target);
+            let params = Object.fromEntries(data.entries());
+            addUsuario(params);
+        });
+        
+        const addUsuario = (params) => {
+            console.log(params);
+            const datosUpload = {
+                id: 0,
+                correo: params.correo,
+                contraseña: params.password,
+                foto: params.image.name,
+                rol: params.rol,
+                nombre: params.nombre,
+                apellido1: params.apellido1,
+                apellido2: params.apellido2,
+                edad: params.edad,
+                gustos: params.gustos,
+                formacion: params.formacion,
+                trabajo: params.trabajo,
+                id_carrera: {
+                    id: params.carrera,
+                },
+                id_sentimental: {
+                    id: params.sentimental,
+                },
+                id_estado: {
+                    id: params.estado,
+                }
+            };
+            const options = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(datosUpload)
+            };
+            fetch(`${URL}UsuariosRest/`, options)
+            .then((response) => response.json())
+            .then((doc) => {
+                if (doc !== null) {
+                    console.log('Guardado');
+                    //location.href = '/';
+                } else {
+                    console.log(doc);
+                    throw new Error('We have problem Houston!');
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        };
+        
+        const getCarreras = () => {
+            carrerasDiv.innerHTML=`
+                <select id="carrerasSelect" name="carrera"></select>
+            `;
+            let carrerasSelect = document.getElementById('carrerasSelect');
+            fetch(`${URL}CarrerasRest/`)
+            .then((response) => response.json())
+            .then((doc) => {
+                doc.forEach((doc)=>{
+                    carrerasSelect.innerHTML += `
+                        <option value="${doc.id}" >${doc.carrera}</option>
+                    `;
+                });
+            });
+        };
+        
+        const getSentimentales = () => {
+            sentimentalesDiv.innerHTML=`
+                <select id="sentimentalesSelect" name="sentimental"></select>
+            `;
+            let sentimentalesSelect = document.getElementById('sentimentalesSelect');
+            fetch(`${URL}SentimentalesRest/`)
+            .then((response) => response.json())
+            .then((doc) => {
+                doc.forEach((doc)=>{
+                    sentimentalesSelect.innerHTML += `
+                        <option value="${doc.id}" >${doc.sentimental}</option>
+                    `;
+                });
+            });
+        };
+        
+        const getEstados = () => {
+            estadosDiv.innerHTML=`
+                <select id="estadosSelect" name="estado"></select>
+            `;
+            let estadosSelect = document.getElementById('estadosSelect');
+            fetch(`${URL}EstadosRest/`)
+            .then((response) => response.json())
+            .then((doc) => {
+                doc.forEach((doc)=>{
+                    estadosSelect.innerHTML += `
+                        <option value="${doc.id}" >${doc.estado}</option>
+                    `;
+                });
+            });
+        };
+        
+        getCarreras();
+        getSentimentales();
+        getEstados();
+    </script>
+</html>

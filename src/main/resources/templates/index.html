@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Index</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>INDEX</h1>
+        <form method="post" data-th-action="@{/logout}">
+            <b>Usuario:</b> <span sec:authentication="name">Usuario logueado</span>
+            <b>Rol:</b> <span sec:authentication="principal.authorities">Roles</span>
+            <br><a href="#" onclick="this.parentNode.submit();">Logout</a>
+        </form>
+    </body>
+</html>

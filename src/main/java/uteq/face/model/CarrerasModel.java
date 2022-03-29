@@ -18,7 +18,8 @@ public class CarrerasModel implements Serializable {
   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "idCarrera")
+    private Long idCarrera;
     
     @Column(name = "carrera")
     private String carrera;

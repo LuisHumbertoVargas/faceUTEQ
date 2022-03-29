@@ -24,15 +24,19 @@ public class UsuarioService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
+        
         UsuariosModel usuario = usuariosDao.findByCorreo(correo);
+        
         if (usuario == null) {
             throw new UsernameNotFoundException(correo);
         }
+        
         ArrayList<GrantedAuthority> roles = new ArrayList<>();
 
         roles.add(new SimpleGrantedAuthority(usuario.getRol()));
 
-        User user = new User(usuario.getCorreo(), usuario.getContraseña(), roles);
+        User user = new User(usuario.getCorreo(), usuario.getPassword(), roles);
+        
         return user;
     }
 }

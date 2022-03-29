@@ -18,11 +18,11 @@ public class SentimentalesModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    private Long id;
+    @Column(name = "idSentimental")
+    private Long idSentimental;
     
     @Column(name = "sentimental")
     private String sentimental;
     
-    //@Basic(optional = false)//
+    
 }

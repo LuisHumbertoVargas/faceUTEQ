@@ -1,71 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Login</title> 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <title>Login</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+        />
         <style>
-            body{
-                background:#789;
+            body {
+                background: #789;
             }
-            .tituloH1{
+            .tituloH1 {
                 font-weight: 900;
-                color:white;
+                color: white;
                 text-align: center;
                 -webkit-text-stroke: 2.5px #123;
                 margin-top: 25px;
             }
-            .loginForm{
+            .loginForm {
                 text-align: center;
                 margin-top: 50px;
             }
-            .loginLabel{
-                color:white;
+            .loginLabel {
+                color: white;
                 font-weight: 700;
                 width: 100px;
-                background:#567;
+                background: #567;
                 border-radius: 5px;
                 padding: 5px;
             }
-            .loginInput{
+            .loginInput {
                 outline: none;
-                border:0;
+                border: 0;
                 border-radius: 5px;
-                background:#123;
-                color:white;
+                background: #123;
+                color: white;
                 font-weight: 700;
                 width: 200px;
                 padding: 5px;
-                margin-bottom: 5px
+                margin-bottom: 5px;
             }
-            .loginButton{
+            .loginButton {
                 font-weight: 500;
                 background: #456;
-                border:0;
+                border: 0;
                 width: 200px;
                 margin-top: 10px;
             }
-            .loginA{
+            .loginA {
                 text-decoration: none;
-                color:white;
+                color: white;
                 font-weight: 600;
                 text-align: center;
-                display:block;
+                display: block;
                 margin-bottom: 5px;
                 width: max-content;
             }
-            .loginA:hover{
-                color:#123;
+            .loginA:hover {
+                color: #123;
             }
-            .fondoDiv{
+            .fondoDiv {
                 width: 100%;
                 height: 100%;
                 position: fixed;
                 background: transparent;
-                top:0;
+                top: 0;
             }
-            .bodyDiv{
+            .bodyDiv {
                 filter: blur(0px);
                 transition: all 1s;
             }
@@ -76,21 +81,50 @@
             <h1 class="tituloH1">FaceUTEQ</h1>
             <form class="loginForm" method="post" data-th-action="@{/login}">
                 <label class="loginLabel" for="username">Correo</label>
-                <input class="loginInput" type="text" name="username" id="username"/>
-                <br>
-                <label class="loginLabel" for="password">Contraseña</label>
-                <input class="loginInput" type="password" name="password" id="password"/>
-                <br>
-                <input class="btn btn-primary loginButton" type="submit" value="Ingresar"/>
+                <input
+                    class="loginInput"
+                    type="text"
+                    name="username"
+                    id="username"
+                />
+                <br />
+
+                <label class="loginLabel" for="password">password</label>
+                <input
+                    class="loginInput"
+                    type="password"
+                    name="password"
+                    id="password"
+                />
+                <br />
+
+                <input
+                    class="btn btn-primary loginButton"
+                    type="submit"
+                    value="Ingresar"
+                />
             </form>
-            <br><br>
+            <br /><br />
+
             <center>
-                <a href="/registro" id="registrarseA" class="loginA" >Registrarse</a>
-                <a href="#" id="recuperacionA" class="loginA">¿Olvidaste tu contraseña?</a>
+                <a
+                    href="/registro"
+                    data-th-href="@{/registro}"
+                    id="registrarseA"
+                    class="loginA"
+                    >Registrarse</a
+                >
+                <a href="#" id="recuperacionA" class="loginA"
+                    >¿Olvidaste tu password?</a
+                >
             </center>
         </div>
-        <div id="modalDiv"></div>
 
+        <div id="modalDiv"></div>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"
+    ></script>
 </html>

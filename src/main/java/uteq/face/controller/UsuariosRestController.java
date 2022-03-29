@@ -42,7 +42,7 @@ public class UsuariosRestController {
         }
 
         usuarioActual.setCorreo(usuario.getCorreo());
-        usuarioActual.setContraseña(usuario.getContraseña());
+        usuarioActual.setPassword(usuario.getPassword());
         usuarioActual.setFoto(usuario.getFoto());
         usuarioActual.setRol(usuario.getRol());
         usuarioActual.setNombre(usuario.getNombre());
@@ -52,9 +52,9 @@ public class UsuariosRestController {
         usuarioActual.setGustos(usuario.getGustos());
         usuarioActual.setFormacion(usuario.getFormacion());
         usuarioActual.setTrabajo(usuario.getTrabajo());
-        usuarioActual.setId_carrera(usuario.getId_carrera());
-        usuarioActual.setId_sentimental(usuario.getId_sentimental());
-        usuarioActual.setId_estado(usuario.getId_estado());
+        usuarioActual.setIdCarrera(usuario.getIdCarrera());
+        usuarioActual.setIdSentimental(usuario.getIdSentimental());
+        usuarioActual.setIdEstado(usuario.getIdEstado());
 
         UsuariosModel usuarioActualizado = usuariosDao.save(usuarioActual);
         HttpStatus generatedStatus = HttpStatus.CREATED;
@@ -62,9 +62,13 @@ public class UsuariosRestController {
         return new ResponseEntity<>(usuarioActualizado, generatedStatus);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<UsuariosModel> post(@RequestBody UsuariosModel usuario) {
-        return new ResponseEntity<>(usuariosDao.save(usuario), HttpStatus.CREATED);
+
+        UsuariosModel usuarioNuevo = usuariosDao.save(usuario);
+        HttpStatus generatedStatus = HttpStatus.CREATED;
+
+        return new ResponseEntity<>(usuarioNuevo, generatedStatus);
     }
 
     @DeleteMapping("/{id}")

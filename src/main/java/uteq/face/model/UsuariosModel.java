@@ -20,13 +20,14 @@ public class UsuariosModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "idUsuarios")
+    private Long idUsuarios;
 
     @Column(name = "correo")
     private String correo;
 
-    @Column(name = "contraseña")
-    private String contraseña;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "foto")
     private String foto;
@@ -66,14 +67,15 @@ public class UsuariosModel implements Serializable {
     }
      */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_carrera")
-    private CarrerasModel id_carrera;
+    @JoinColumn(name = "idCarrera")
+    private CarrerasModel idCarrera;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_sentimental")
-    private SentimentalesModel id_sentimental;
+    @JoinColumn(name = "idSentimental")
+    private SentimentalesModel idSentimental;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_estado")
-    private EstadosModel id_estado;
+    @JoinColumn(name = "idEstado")
+    private EstadosModel idEstado;
+
 }

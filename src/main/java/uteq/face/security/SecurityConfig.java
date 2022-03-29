@@ -37,19 +37,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .password("{noop}123")
 //                .roles("USER");
 //    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/","/perfil")
+                .antMatchers("/", "/perfil")
                 .hasAnyRole("ESTUDIANTE","PROFESOR")
-                .antMatchers(HttpMethod.POST, "/CarrerasRest")
-                .anonymous()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
+                
     }
-//    .antMatchers("/")
-//                .hasRole("ESTUDIANTE")
+
 }

@@ -18,7 +18,8 @@ public class EstadosModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "idEstado")
+    private Long idEstado;
     
     @Column(name = "estado")
     private String estado;
